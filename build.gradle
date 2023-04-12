@@ -48,6 +48,12 @@ dependencies {
 
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.4'
     implementation group: 'com.zaxxer', name: 'HikariCP',version:'5.0.1'
+    //mybatis - spring 연동을 위한 라이브러리 (스프링 설정 라이브러리랑 버전을 맞춰야함 )
+    implementation group: 'org.springframework', name: 'spring-jdbc', version:'5.3.19'
+    implementation group: 'org.springframework', name: 'spring-tx', version:'5.3.19'
+    //mybatis관련 라이브러리
+    implementation 'org.mybatis:mybatis:3.5.9'
+    implementation 'org.mybatis:mybatis-spring:2.0.7'
 }
 
 test {

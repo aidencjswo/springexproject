@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!-- XML문서가 어떤 버전을 사용하며, 어떤 문자 인코딩 방식으로 인코딩 되었는지를 나타냄 -->
+<!--
+<!DOCTYPE> : 문서 유형 선언을 시작하는 키워드
+mapper : 문서 유형의 이름. Mybatis에서는 SQL 매핑 정보를 저장하는 XML파일을 mapper라고 부름
+PUBLIC : 공개 식별자를 사용하며 DTD를 참조하는 것을 나타냄
+//mybatis.org//DTD Mapper 3.0//EN : DTD파일의 실제 위치를 나타내는 URL -> 인터넷을 통해 DTD파일에 엑세스 할 수 있도록 함
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.springex.mapper.TimeMapper2">
+    <select id="getNow" resultType="string">
+        select now()
+    </select>
+</mapper>

@@ -2,6 +2,53 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
     <context:component-scan base-package="org.zerock.springex.sample"/>
+
+    <!-- dataSource가 hikariConfig id값을 참조해서 사용하고있다. -->
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mariadb://localhost:3306/webdb"></property>
+
+        <property name="username" value="webuser"></property>
+        <property name="password" value="webuswer"></property>
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="cachePrepStmts">true</prop>
+                <prop key="propStmtCacheSize">250</prop>
+                <prop key="prepStmtCacheSqlLimit">2048</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <!-- hikariConfig를 참조 -->
+        <constructor-arg ref="hikariConfig"/>
+    </bean>
+
+    <!-- sqlSessionFactory bean등록 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- property의 의미는 bean의 속성을 의미한다.
+             Property는 Bean클래스 내부의 멤버 변수에 해당하고, 이 변수들의 값을 스프링 설정 파일(XML 또는 Java Config)에서 지정할 수 있음.
+             이러한 설정 파일은 스프링 컨테이너에서 Bean이 생성 될 때, Bean의 Property 값으로 주입된다.
+             ex)
+             <bean id = "user" class = "com.example.User">
+                <property name="id" value="01"/>
+                <property name="name" value="kim"/>
+                <property name="age" value="30"/>
+             </bean>
+             User 객체의 id,name,age 속성이 각각 01,kim,30으로 설정되어 스프링 컨테이너에서 User Bean이 생성될 때,
+             이 값들이 Property 값으로 주입되어 User객체가 생성된다.
+        -->
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- XML파일의 위치를 인식 할 수 있도록 설정
+             classpath : resources 폴더를 의미함.
+             ** : 현재 디렉토리와 그 하위 디렉토리의 모든 파일들을 의미함.
+         -->
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>
+    </bean>
+
+    <mybatis:scan base-package="org.zerock.springex.mapper"></mybatis:scan>
 </beans>

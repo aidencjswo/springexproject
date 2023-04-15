@@ -5,7 +5,8 @@
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-    <context:component-scan base-package="org.zerock.springex.sample"/>
+    <context:component-scan base-package="org.zerock.springex.config"/>
+    <context:component-scan base-package="org.zerock.springex.service"/>
 
     <!-- dataSource가 hikariConfig id값을 참조해서 사용하고있다. -->
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
@@ -24,7 +25,10 @@
     </bean>
 
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-        <!-- hikariConfig를 참조 -->
+        <!--
+         hikariConfig를 참조
+         <constructor-arg ref = ""/> : 해당 bean에서 생성한
+        -->
         <constructor-arg ref="hikariConfig"/>
     </bean>
 

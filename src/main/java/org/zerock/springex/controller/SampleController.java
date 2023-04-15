@@ -63,12 +63,9 @@ public class SampleController {
 
     @GetMapping("/ex5")
     public String ex5(RedirectAttributes redirectAttributes){
-        /**
-         * redirectAttributes.addAttribute() : 리다이렉트할 URL(ex6)에 쿼리스트링으로 추가
-         * localhost:8080/ex6?name=ABC으로 붙음
-         */
+
         redirectAttributes.addAttribute("name", "ABC");
-        //redirectAttributes.addFlashAttribute() : 리다이렉트한 페이지에서 일회성으로 사용 가능한 데이터가 됨
+
         redirectAttributes.addFlashAttribute("result","success");
 
         return "redirect:/ex6";
@@ -78,6 +75,7 @@ public class SampleController {
     public void ex6(){
 
     }
+
     @GetMapping("/ex7")
     public void ex7(String p1, int p2){
         log.info("p1..."+p1);

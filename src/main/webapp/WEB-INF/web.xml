@@ -42,4 +42,18 @@
             <!-- 이 서블릿에 매핑할 URL 패턴을 지정, 즉 모든 요청이 appServlet으로 전달됨 -->
             <url-pattern>/</url-pattern>
         </servlet-mapping>
+        <filter>
+            <filter-name>encoding</filter-name>
+            <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+
+            <init-param>
+                <param-name>encoding</param-name>
+                <param-value>UTF-8</param-value>
+            </init-param>
+        </filter>
+
+        <filter-mapping>
+            <filter-name>encoding</filter-name>
+            <servlet-name>appServlet</servlet-name>
+        </filter-mapping>
 </web-app>

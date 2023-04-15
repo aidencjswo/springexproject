@@ -1,4 +1,4 @@
-package org.zerock.springex.sample.mapper;
+package org.zerock.springex.sample.mapper.mapper;
 
 
 import lombok.extern.log4j.Log4j2;

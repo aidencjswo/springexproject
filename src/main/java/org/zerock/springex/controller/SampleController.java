@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.springex.dto.TodoDTO;
 
 import java.time.LocalDate;
@@ -52,5 +53,25 @@ public class SampleController {
     @GetMapping("/ex4_1")
     public void ex4_1(TodoDTO todoDTO,Model model){
         log.info(todoDTO);
+    }
+
+    @GetMapping("/ex5")
+    public String ex5(RedirectAttributes redirectAttributes){
+
+        redirectAttributes.addAttribute("name", "ABC");
+        redirectAttributes.addFlashAttribute("result","success");
+
+        return "redirect:/ex6";
+    }
+
+    @GetMapping("/ex6")
+    public void ex6(){
+
+    }
+
+    @GetMapping("/ex7")
+    public void ex7(String p1, int p2){
+        log.info("p1..."+p1);
+        log.info("p2..."+p2);
     }
 }

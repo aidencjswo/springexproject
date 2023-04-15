@@ -28,6 +28,10 @@
                 <param-name>contextConfigLocation</param-name>
                 <param-value>/WEB-INF/servlet-context.xml</param-value>
             </init-param>
+            <init-param>
+                <param-name>throwExceptionIfNoHandlerFound</param-name>
+                <param-value>true</param-value>
+            </init-param>
             <!-- 서블릿이 로드 되는 순서를 지정 1이상의 값으로 설정하면 서버가 시작될 때 서블릿이 자동으로 초기화 됨 -->
             <load-on-startup>1</load-on-startup>
         </servlet>
